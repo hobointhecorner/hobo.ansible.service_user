@@ -1,6 +1,7 @@
 ---
+service_user_id:
 service_group_name: "{{ service_user_name }}"
-service_group_id: "{{ service_user_id }}"
+service_group_id: "{{ service_user_id|default(omit, true) }}"
 service_additional_groups: []
-service_additional_members: []
-add_additional_members_to_groups: no
+service_additional_group_members: []
+service_extended_group_membership: no
