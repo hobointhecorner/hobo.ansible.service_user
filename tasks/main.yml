@@ -1,0 +1,34 @@
+---
+- name: Ensure service group
+  become: yes
+  loop: "{{ service_group_name }}"
+  group:
+    name: "{{ service_group_name }}"
+    gid: "{{ service_group_id }}"
+
+- name: Ensure service user
+  become: yes
+  user:
+    name: "{{ service_user_name }}"
+    group: "{{ service_user_group }}"
+    uid: "{{ service_user_id }}"
+    groups: "{{ service_additional_groups }}"
+    append: yes
+
+- name: Ensure additional user service group membership
+  become: yes
+  loop: "{{ service_additional_members }}"
+  user:
+    name: "{{ item }}"
+    append: yes
+    groups:
+      - "{{ service_group_name }}"
+
+- name: Ensure additional user extended group membership
+  when: add_additional_members_to_groups|bool
+  become: yes
+  loop: "{{ service_additional_members }}"
+  user:
+    name: "{{ item }}"
+    append: yes
+    groups: "{{ service_additional_groups }}"
