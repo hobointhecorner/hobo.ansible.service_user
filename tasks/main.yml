@@ -18,7 +18,7 @@
 
 - name: Ensure additional user service group membership
   become: yes
-  loop: "{{ service_additional_members }}"
+  loop: "{{ service_additional_group_members }}"
   tags: ['service-user']
   user:
     name: "{{ item }}"
@@ -28,7 +28,7 @@
 - name: Ensure additional user extended group membership
   when: service_extended_group_membership|bool
   become: yes
-  loop: "{{ service_additional_members }}"
+  loop: "{{ service_additional_group_members }}"
   tags: ['service-user']
   user:
     name: "{{ item }}"
