@@ -11,7 +11,7 @@
   tags: ['service-user']
   user:
     name: "{{ service_user_name }}"
-    group: "{{ service_user_group }}"
+    group: "{{ service_group_name }}"
     uid: "{{ service_user_id }}"
     groups: "{{ service_additional_groups }}"
     append: yes
