@@ -1,7 +1,6 @@
 ---
 - name: Ensure service group
   become: yes
-  loop: "{{ service_group_name }}"
   tags: ['service-user']
   group:
     name: "{{ service_group_name }}"
