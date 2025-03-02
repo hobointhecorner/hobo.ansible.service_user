@@ -1,6 +1,7 @@
 ---
 galaxy_info:
-  role_name: hobo.ansible.service_user
+  role_name: service_user
+  namespace: hobointhecorner
   author: hobointhecorner
   description: Configure user and group(s) for a linux service
   license: MPL-2.0
