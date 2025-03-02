@@ -1,36 +1,36 @@
 ---
 - name: Ensure service group
-  become: yes
+  become: true
   tags: ['service-user']
-  group:
-    name: "{{ service_group_name }}"
-    gid: "{{ service_group_id|default(omit, true) }}"
+  ansible.builtin.group:
+    name: "{{ service_user_group_name }}"
+    gid: "{{ service_user_group_id|default(omit, true) }}"
 
 - name: Ensure service user
-  become: yes
+  become: true
   tags: ['service-user']
-  user:
+  ansible.builtin.user:
     name: "{{ service_user_name }}"
-    group: "{{ service_group_name }}"
+    group: "{{ service_user_group_name }}"
     uid: "{{ service_user_id|default(omit, true) }}"
-    groups: "{{ service_additional_groups }}"
-    append: yes
+    groups: "{{ service_user_additional_groups }}"
+    append: true
 
 - name: Ensure additional user service group membership
-  become: yes
-  loop: "{{ service_additional_group_members }}"
+  become: true
+  loop: "{{ service_user_additional_group_members }}"
   tags: ['service-user']
-  user:
+  ansible.builtin.user:
     name: "{{ item }}"
-    append: yes
-    groups: ["{{ service_group_name }}"]
+    append: true
+    groups: ["{{ service_user_group_name }}"]
 
 - name: Ensure additional user extended group membership
-  when: service_extended_group_membership|bool
-  become: yes
-  loop: "{{ service_additional_group_members }}"
+  when: service_user_extended_group_membership|bool
+  become: true
+  loop: "{{ service_user_additional_group_members }}"
   tags: ['service-user']
-  user:
+  ansible.builtin.user:
     name: "{{ item }}"
-    append: yes
-    groups: "{{ service_additional_groups }}"
+    append: true
+    groups: "{{ service_user_additional_groups }}"
