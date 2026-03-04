@@ -1,0 +1,53 @@
+---
+argument_specs:
+  main:
+    options:
+      #
+      # REQUIRED
+      #
+
+      service_user_name:
+        type: str
+        required: true
+        description: The name of the user and group to be created
+
+      #
+      # OPTIONAL
+      #
+
+      service_user_id:
+        type: str
+        required: false
+        description: he UID of the user, will use a system-provided UID if not defined
+
+      service_user_group_name:
+        type: str
+        required: false
+        description: The name of the group to be created, defaults to the value of `service_user_name`
+
+      service_user_group_id:
+        type: str
+        required: false
+        description: The GID of the group, will use a system-provided GID if not defined
+
+      service_user_additional_groups:
+        type: list
+        elements: str
+        default: []
+        description: A list of additional groups of which the service user should be a member
+
+      service_user_create_additional_groups:
+        type: bool
+        default: false
+        description: Create groups in service_user_additional_groups if not already present
+
+      service_user_additional_group_members:
+        type: list
+        elements: str
+        default: []
+        description: A list of additional users of which should be members of the service group
+
+      service_user_extended_group_membership:
+        type: bool
+        default: false
+        description: Add users provided in `service_user_additional_group_members` to groups provided in `service_user_additional_groups`
